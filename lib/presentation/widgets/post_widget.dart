@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:utor_technical_round/domain/models/post.dart';
 
@@ -51,6 +51,9 @@ class PostWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    )
+        .animate(delay: const Duration(milliseconds: 300))
+       
+        .fadeIn(duration: const Duration(milliseconds: 240));
   }
 }

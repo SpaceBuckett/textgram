@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:utor_technical_round/domain/models/comment.dart';
@@ -33,11 +34,17 @@ class PostDetails extends StatelessWidget {
               PostDetailsContainer(
                 user: user,
                 post: post,
-              ),
+              )
+                  .animate()
+                  .scale()
+                  .fadeIn(duration: const Duration(milliseconds: 300)),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 15.h),
                 child: const Divider(),
-              ),
+              )
+                  .animate()
+                  .scale()
+                  .fadeIn(duration: const Duration(milliseconds: 300)),
               Obx(
                 () => postDetailsController.isLoadingComments.value == true
                     ? const Center(
@@ -105,7 +112,9 @@ class CommentWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
+    )
+        .animate(delay: const Duration(milliseconds: 300))
+        .fadeIn(duration: const Duration(milliseconds: 240));
   }
 
   String getTextWithoutNewLine(String commentBody) {
