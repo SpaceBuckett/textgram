@@ -3,6 +3,7 @@ import 'package:utor_technical_round/config/services/database_service.dart';
 
 class PostDetailsController extends GetxController {
   final dbService = Get.put(DatabaseService());
+
   List comments = [].obs;
   RxBool isLoadingComments = false.obs;
 
@@ -12,11 +13,9 @@ class PostDetailsController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Initialize userId after the controller is created
     final args = Get.arguments;
     if (args != null && args.containsKey('postId')) {
       postId.value = args['postId'].toString();
-      print("GETTING COMMENTS FOR POST ${postId.value}...");
       fetchUserPosts(postId: postId.value);
     }
   }
@@ -27,8 +26,9 @@ class PostDetailsController extends GetxController {
       comments = await dbService.fetchPostComments(
         postId: postId,
       );
-    } catch (error, stacktrace) {}
-
+    } catch (error) {
+      Get.snackbar('An Error Occured', error.toString());
+    }
     isLoadingComments.value = false;
   }
 }

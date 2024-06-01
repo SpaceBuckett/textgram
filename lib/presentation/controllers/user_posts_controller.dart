@@ -3,6 +3,7 @@ import 'package:utor_technical_round/config/services/database_service.dart';
 
 class UserPostsController extends GetxController {
   final dbService = Get.put(DatabaseService());
+
   List posts = [].obs;
   RxBool isLoadingData = false.obs;
 
@@ -12,11 +13,9 @@ class UserPostsController extends GetxController {
   void onInit() {
     super.onInit();
 
-    // Initialize userId after the controller is created
     final args = Get.arguments;
     if (args != null && args.containsKey('userId')) {
       userId.value = args['userId'].toString();
-      print("GETTING POSTS FOR USER ${userId.value}...");
       fetchUserPosts(userId: userId.value);
     }
   }
@@ -27,7 +26,9 @@ class UserPostsController extends GetxController {
       posts = await dbService.fetchUserPosts(
         userId: userId,
       );
-    } catch (error, stacktrace) {}
+    } catch (error) {
+      Get.snackbar('An Error Occured', error.toString());
+    }
 
     isLoadingData.value = false;
   }

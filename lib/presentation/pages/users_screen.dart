@@ -31,13 +31,14 @@ class UsersScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   User user = usersController.users[index];
                   return GestureDetector(
-                      onTap: () {
-                        Get.to(
-                          () => UserPostsScreen(user: user),
-                          arguments: {'userId': user.id},
-                        );
-                      },
-                      child: UserWidget(user: user));
+                    onTap: () {
+                      Get.to(
+                        () => UserPostsScreen(user: user),
+                        arguments: {'userId': user.id},
+                      );
+                    },
+                    child: UserWidget(user: user),
+                  );
                 },
               ),
       ),

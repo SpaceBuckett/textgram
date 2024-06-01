@@ -53,7 +53,6 @@ class PostWidget extends StatelessWidget {
       ),
     )
         .animate(delay: const Duration(milliseconds: 300))
-       
         .fadeIn(duration: const Duration(milliseconds: 240));
   }
 }
